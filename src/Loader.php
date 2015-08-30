@@ -10,10 +10,6 @@ class Loader extends \Dotenv\Loader {
 	
 	public function getEnvironmentVariable($name) {
 		
-		if (empty($_ENV)) {
-			throw new \Exception('Empty $_ENV variable, switch by something else.');
-		}
-		
 		switch (true) {
 			case array_key_exists($name, $_ENV):
 				return $_ENV[$name];
