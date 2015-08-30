@@ -8,7 +8,7 @@ A lot of shared hostings (including mine) does not allow `putenv` function due t
 Consider this library deprecated anytime the owner of Phpdotenv incorporates similar functionality. 
 
 What is this used for?
-===
+---
 
 More info about Phpdotenv at the original repo: [Phpdotenv](https://github.com/vlucas/phpdotenv)
 
@@ -16,3 +16,5 @@ Installation
 ===
 
 	composer install cibulka/phpnotenv
+	
+Commit test.
