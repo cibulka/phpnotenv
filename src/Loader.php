@@ -1,10 +1,10 @@
 <?php
 	
-namespace Cibulka\Notenv;
+namespace Notenv;
 
-class Loader extends Dotenv\Loader {
+class Loader extends \Dotenv\Loader {
 	
-	protected $notenv_data;
+	protected $notenv_data = array();
 	
 	protected $notenv_callback;
 	
@@ -21,15 +21,19 @@ class Loader extends Dotenv\Loader {
 			case array_key_exists($name, $_SERVER):
 				return $_SERVER[$name];
 			break;
-			case array_key_exists($name, this->notenv_data):
+			case array_key_exists($name, $this->notenv_data):
 				return $this->notenv_data[$name];
 			break;
 		}
 		
 	}
 	
-	public function setEnvironmentVariable($name, $data) {
-		
+	public function get($name) {
+		return $this->getEnvironmentVariable($name);
+	}
+	
+	public function setEnvironmentVariable($name, $value=null) {
+				
         list($name, $value) = $this->normaliseEnvironmentVariable($name, $value);
 
         // Don't overwrite existing environment variables if we're immutable
@@ -42,8 +46,12 @@ class Loader extends Dotenv\Loader {
 	        call_user_func_array($this->notenv_callback, func_get_args());
         }
         
-        $this->notenv_data[$name] = $data;
+        $this->notenv_data[$name] = $value;
 		
+	}
+
+	public function set($name, $value=null) {
+		return $this->setEnvironmentVariable($name, $value);
 	}
 	
 	public function clearEnvironmentVariable($name) {
@@ -51,7 +59,7 @@ class Loader extends Dotenv\Loader {
 		parent::cleanEnvironmentVariable($name);
 		
 		if (!$this->immutable) {
-			unset($this->notenv_data[$name]);
+			unset($this->notenv_data[$name]);
 		}
 		
 	}
