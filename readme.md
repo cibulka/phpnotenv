@@ -15,4 +15,4 @@ More info about Phpdotenv at the original repo: [Phpdotenv](https://github.com/v
 Installation
 ===
 
-	composer install cibulka/php-not-env
+	composer install cibulka/phpnotenv
